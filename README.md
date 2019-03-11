@@ -24,6 +24,8 @@ docker cp mingw-w64-x86_64-gnutls-3.6.6-2-any.pkg.tar.xz win42:/tmp
 docker cp mingw64-packages.txt win42:/tmp
 # script to setup docker volume
 docker cp setup-docker-volume.sh win42:/tmp
+# tlspool configuration files and client programs
+docker cp tlspool win42:/msys64/home
 ```
 switch back to terminal running docker bash
 
@@ -313,3 +315,79 @@ Z:\msys64\home\arpa2\tlspool\build><b>copy lib\libtlspool.dll z:\msys64\mingw64\
 
 Z:\msys64\home\arpa2\tlspool\build>
 </pre>
+
+## Running tlspool
+<pre>
+root@530226e28371:/# <b>cd /msys64/home/tlspool/bin/</b>
+root@530226e28371:/# <b>wine cmd</b>
+Microsoft Windows 6.1.7601 (4.3)
+
+Z:\msys64\home\tlspool\bin><b>setenv</b>
+
+Z:\msys64\home\tlspool\bin>set PATH=C:\windows\system32;C:\windows;C:\windows\system32\wbem;z:\msys64\mingw64\bin 
+
+Z:\msys64\home\tlspool\bin>set TLSPOOL_CFGFILE=tlspool.conf.windows  
+
+Z:\msys64\home\tlspool\bin><b>server</b>
+Z:\msys64\home\tlspool\bin>tlspool -c tlspool.conf.windows  
+The Winsock 2.2 dll was found okay
+0193:fixme:ntdll:NtLockFile I/O completion on lock not implemented yet
+0193:fixme:advapi:RegisterEventSourceA ((null),"SoftHSM"): stub
+0193:fixme:advapi:RegisterEventSourceW (L"",L"SoftHSM"): stub
+0193:fixme:advapi:ReportEventA (0xcafe4242,0x0002,0x0000,0x80000002,(nil),0x0001,0x00000000,0x32f060,(nil)): stub
+0193:fixme:advapi:ReportEventW (0xcafe4242,0x0002,0x0000,0x80000002,(nil),0x0001,0x00000000,0x72db0,(nil)): stub
+This version ignores all LDAP proxy servers
+This version ignores all LDAP proxy servers
+TLS Pool started
+Compiled against GnuTLS version 3.6.6
+Running against acceptable GnuTLS version 3.6.6
+Setting server anonymous credentials
+Setting client anonymous credentials
+Setting client and server certificate credentials
+GnuTLS: added 6 protocols, 35 ciphersuites, 18 sig algos and 9 groups into priority list
+
+DEBUG: gtls_errno = 0, otfsigcrt == NULL, otfsigkey == NULL
+DEBUG: When it matters, gtls_errno = 0, onthefly_issuercrt == NULL, onthefly_issuerkey == NULL
+</pre>
+
+On another terminal we run a server using tlspool
+<pre>
+henris-mbp:wine manson$ docker exec -it win42 bash
+root@530226e28371:/# <b>cd /msys64/home/tlspool/bin</b>
+root@530226e28371:/msys64/home/tlspool/bin# <b>wine cmd</b>
+Microsoft Windows 6.1.7601 (4.3)
+
+Z:\msys64\home\tlspool\bin><b>setenv</b>
+
+Z:\msys64\home\tlspool\bin>set PATH=C:\windows\system32;C:\windows;C:\windows\system32\wbem;z:\msys64\mingw64\bin 
+
+Z:\msys64\home\tlspool\bin>set TLSPOOL_CFGFILE=tlspool.conf.windows  
+
+Z:\msys64\home\tlspool\bin><b>testsrvdll</b>
+</pre>
+
+On yet another terminal we run a client using tlspool
+<pre>
+henris-mbp:wine manson$ docker exec -it win42 bash
+root@530226e28371:/# <b>cd /msys64/home/tlspool/bin</b>
+root@530226e28371:/msys64/home/tlspool/bin# <b>wine cmd</b>
+Microsoft Windows 6.1.7601 (4.3)
+
+Z:\msys64\home\tlspool\bin><b>setenv</b>
+
+Z:\msys64\home\tlspool\bin>set PATH=C:\windows\system32;C:\windows;C:\windows\system32\wbem;z:\msys64\mingw64\bin 
+
+Z:\msys64\home\tlspool\bin>set TLSPOOL_CFGFILE=tlspool.conf.windows  
+
+Z:\msys64\home\tlspool\bin><b>testclidll localhost</b>
+DEBUG: Opening TLS Pool on socket path \\.\pipe\tlspool
+GetNamedPipeServerProcessId: ServerProcessId = 407
+DEBUG: pid = 407, cryptfd = 76
+Sending 1028 byte cmd
+018d:fixme:winsock:WS_EnterSingleProtocolW unknown Protocol <0x00000000>
+Sending 1028 byte cmd
+Bytes Sent: 15
+Bytes received: 15, data: this is a test
+
+</pre>
+
