@@ -31,3 +31,56 @@ switch back to terminal running docker bash
 ```
 root@454514ecc504:/# /tmp/setup-docker-volume.sh
 ```
+
+## Building and installing ARPA2CM
+
+<pre>
+root@530226e28371:/# <b>wine cmd</b>
+Microsoft Windows 6.1.7601 (4.3)
+
+Z:\><b>cd \msys64\home\arpa2\arpa2cm</b>
+
+Z:\msys64\home\arpa2\arpa2cm><b>mkdir build</b>
+
+Z:\msys64\home\arpa2\arpa2cm><b>cd build</b>
+
+Z:\msys64\home\arpa2\arpa2cm\build><b>set PATH=%PATH%;z:\msys64\mingw64\bin</b>
+
+Z:\msys64\home\arpa2\arpa2cm\build><b>cmake -G "MinGW Makefiles" "-DCMAKE_INSTALL_PREFIX:PATH=Z:/msys64/mingw64" ..</b>
+-- 
+-- Configuring done
+-- Generating done
+-- Build files have been written to: Z:/msys64/home/arpa2/arpa2cm/build
+
+Z:\msys64\home\arpa2\arpa2cm\build><b>mingw32-make install</b>
+Install the project...
+-- Install configuration: ""
+-- Installing: Z:/msys64/mingw64/share/ARPA2CM/modules/Config.cmake.in
+-- Installing: Z:/msys64/mingw64/share/ARPA2CM/modules/ConfigVersion.cmake.in
+-- Installing: Z:/msys64/mingw64/share/ARPA2CM/modules/MacroAddUninstallTarget.cmake
+-- Installing: Z:/msys64/mingw64/share/ARPA2CM/modules/MacroCreateConfigFiles.cmake
+-- Installing: Z:/msys64/mingw64/share/ARPA2CM/modules/MacroEnsureOutOfSourceBuild.cmake
+-- Installing: Z:/msys64/mingw64/share/ARPA2CM/modules/MacroGitVersionInfo.cmake
+-- Installing: Z:/msys64/mingw64/share/ARPA2CM/modules/PackAllPossible.cmake
+-- Installing: Z:/msys64/mingw64/share/ARPA2CM/modules/PythonSupport.cmake
+-- Installing: Z:/msys64/mingw64/share/ARPA2CM/modules/cmake_uninstall.cmake.in
+-- Installing: Z:/msys64/mingw64/share/ARPA2CM/find-modules/ECMFindModuleHelpers.cmake
+-- Installing: Z:/msys64/mingw64/share/ARPA2CM/find-modules/FindBDB.cmake
+-- Installing: Z:/msys64/mingw64/share/ARPA2CM/find-modules/FindGnuTLSDane.cmake
+-- Installing: Z:/msys64/mingw64/share/ARPA2CM/find-modules/FindGperf.cmake
+-- Installing: Z:/msys64/mingw64/share/ARPA2CM/find-modules/FindLibTASN1.cmake
+-- Installing: Z:/msys64/mingw64/share/ARPA2CM/find-modules/FindLibldns.cmake
+-- Installing: Z:/msys64/mingw64/share/ARPA2CM/find-modules/FindLog4cpp.cmake
+-- Installing: Z:/msys64/mingw64/share/ARPA2CM/find-modules/FindOpenLDAP.cmake
+-- Installing: Z:/msys64/mingw64/share/ARPA2CM/find-modules/FindP11-Kit.cmake
+-- Installing: Z:/msys64/mingw64/share/ARPA2CM/find-modules/FindSQLite3.cmake
+-- Installing: Z:/msys64/mingw64/share/ARPA2CM/find-modules/FindUnbound.cmake
+-- Installing: Z:/msys64/mingw64/share/ARPA2CM/find-modules/check_log4cpp.cpp
+-- Installing: Z:/msys64/mingw64/share/ARPA2CM/toolchain/README.md
+-- Installing: Z:/msys64/mingw64/share/ARPA2CM/doc/README.md
+-- Installing: Z:/msys64/mingw64/share/ARPA2CM/doc/CMakeLists.example.txt
+-- Installing: Z:/msys64/mingw64/share/ARPA2CM/cmake/ARPA2CMConfig.cmake
+-- Installing: Z:/msys64/mingw64/share/ARPA2CM/cmake/ARPA2CMConfigVersion.cmake
+
+Z:\msys64\home\arpa2\arpa2cm\build>
+</pre>
