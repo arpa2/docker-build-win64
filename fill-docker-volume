@@ -1,0 +1,17 @@
+#!/bin/sh
+
+docker run --name winehq --rm --mount src=mingw64,dst=/msys64 -t -d wine
+# copy files to /tmp of docker
+# GnuTLS with dane
+docker cp setup-docker-volume/mingw-w64-x86_64-gnutls-3.6.6-2-any.pkg.tar.xz winehq:/tmp
+# list of MSYS2 packages to be installed on /msys64/mingw64
+docker cp setup-docker-volume/mingw64-packages.txt winehq:/tmp
+# script to setup docker volume
+docker cp setup-docker-volume/setup-docker-volume.sh winehq:/tmp
+# tlspool configuration files and client programs
+docker cp setup-docker-volume/home winehq:/msys64
+# fill docker volume with mingw64 and git repositories
+docker exec -t winehq /tmp/setup-docker-volume.sh
+# 
+docker exec -t winehq mkdir  
+docker stop winehq

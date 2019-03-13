@@ -193,7 +193,7 @@ db_trust ../trust.db
 # the TLS Pool.
 #
 
-pkcs11_path z:\msys64\home\tlspool\softhsm2-x64.dll
+pkcs11_path z:\msys64\home\tlspool\bin\softhsm2-x64.dll
 pkcs11_pin 1234
 pkcs11_token pkcs11:model=SoftHSM%20v2;manufacturer=SoftHSM%20project;token=TLS_Pool_dev_data
 

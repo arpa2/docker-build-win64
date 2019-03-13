@@ -1,38 +1,72 @@
+
 # docker-build-win64
 Docker container to build ARPA2 software for 64-bit Windows
 
-```
-git clone https://github.com/arpa2/docker-build-win64
-cd docker-build-win64
-docker build .
-# -e DISPLAY=192.168.2.20:0.0 replace with your X server
-# --name win42 name of containter
-# --rm remove container after stopping
-# --mount src=mingw64,dst=/msys64 mount mingw64 docker volume on /msys64, create if non-existing
-# -it interactive terminal
-# win42 name of docker image
-docker run -e DISPLAY=192.168.2.20:0.0 --name win42 --rm --mount src=mingw64,dst=/msys64 -it win42
-```
+## build and tag wine image
+<pre>
+$ <b>git clone https://github.com/arpa2/docker-build-win64</b>
+$ <b>cd docker-build-win64</b>
+$ <b>docker build --tag wine .</b>
+</pre>
 
-## One time setup of docker volume
-On another terminal in the same docker-build-win64 directory
-```
-# copy files to /tmp of docker
-# GnuTLS with dane
-docker cp mingw-w64-x86_64-gnutls-3.6.6-2-any.pkg.tar.xz win42:/tmp
-# list of MSYS2 packages to be installed on /msys64/mingw64
-docker cp mingw64-packages.txt win42:/tmp
-# script to setup docker volume
-docker cp setup-docker-volume.sh win42:/tmp
-# tlspool configuration files and client programs
-docker cp tlspool win42:/msys64/home
-```
-switch back to terminal running docker bash
-
-
-```
-root@454514ecc504:/# /tmp/setup-docker-volume.sh
-```
+## create mingw64 docker volume and fill it
+<pre>
+$ <b>./fill-docker-volume</b>
+e09f68a1ea05389898018c3036c57da51cfa423aa4474a175df41451fdd07648
+Extracting mingw-w64-x86_64-adwaita-icon-theme-3.30.1-1-any.pkg.tar.xz...
+Extracting mingw-w64-x86_64-atk-2.30.0-1-any.pkg.tar.xz...
+Extracting mingw-w64-x86_64-binutils-2.30-5-any.pkg.tar.xz...
+Extracting mingw-w64-x86_64-brotli-1.0.7-1-any.pkg.tar.xz...
+...
+Extracting mingw-w64-x86_64-zlib-1.2.11-5-any.pkg.tar.xz...
+Extracting mingw-w64-x86_64-zstd-1.3.8-1-any.pkg.tar.xz...
+Extracting GnuTLS with libdane...
+Cloning ARPA2 packages...
+Cloning into 'arpa2cm'...
+remote: Enumerating objects: 3, done.
+remote: Counting objects: 100% (3/3), done.
+remote: Compressing objects: 100% (3/3), done.
+remote: Total 166 (delta 0), reused 1 (delta 0), pack-reused 163
+Receiving objects: 100% (166/166), 46.23 KiB | 0 bytes/s, done.
+Resolving deltas: 100% (86/86), done.
+Checking connectivity... done.
+Cloning into 'quick-der'...
+remote: Enumerating objects: 143, done.
+remote: Counting objects: 100% (143/143), done.
+remote: Compressing objects: 100% (79/79), done.
+remote: Total 1949 (delta 80), reused 102 (delta 57), pack-reused 1806
+Receiving objects: 100% (1949/1949), 1.63 MiB | 1.69 MiB/s, done.
+Resolving deltas: 100% (1223/1223), done.
+Checking connectivity... done.
+Cloning into 'tlspool'...
+remote: Enumerating objects: 134, done.
+remote: Counting objects: 100% (134/134), done.
+remote: Compressing objects: 100% (77/77), done.
+remote: Total 3772 (delta 66), reused 93 (delta 44), pack-reused 3638
+Receiving objects: 100% (3772/3772), 3.22 MiB | 1.98 MiB/s, done.
+Resolving deltas: 100% (2260/2260), done.
+Checking connectivity... done.
+Cloning cmake with updated SHELL_PATH...
+Cloning into 'cmake'...
+remote: Enumerating objects: 266093, done.
+remote: Counting objects: 100% (266093/266093), done.
+remote: Compressing objects: 100% (61448/61448), done.
+remote: Total 266093 (delta 202428), reused 266015 (delta 202366)
+Receiving objects: 100% (266093/266093), 79.90 MiB | 10.77 MiB/s, done.
+Resolving deltas: 100% (202428/202428), done.
+Checking connectivity... done.
+winehq
+$ 
+</pre>
+## start wine container
+* \-\-name winehq name of container
+* \-\-rm remove container after stopping
+* \-\-mount src=mingw64,dst=/msys64 mount mingw64 docker volume on /msys64
+* \-it interactive terminal
+* wine name of docker image
+<pre>
+$ <b>docker run --name winehq --rm --mount src=mingw64,dst=/msys64 -it wine</b>
+</pre>
 
 ## Building and installing ARPA2CM
 
@@ -45,8 +79,6 @@ Z:\><b>cd \msys64\home\arpa2\arpa2cm</b>
 Z:\msys64\home\arpa2\arpa2cm><b>mkdir build</b>
 
 Z:\msys64\home\arpa2\arpa2cm><b>cd build</b>
-
-Z:\msys64\home\arpa2\arpa2cm\build><b>set PATH=%PATH%;z:\msys64\mingw64\bin</b>
 
 Z:\msys64\home\arpa2\arpa2cm\build><b>cmake -G "MinGW Makefiles" "-DCMAKE_INSTALL_PREFIX:PATH=Z:/msys64/mingw64" ..</b>
 -- 
@@ -99,9 +131,7 @@ Z:\msys64\home\arpa2\quick-der><b>mkdir build</b>
 
 Z:\msys64\home\arpa2\quick-der><b>cd build</b>
 
-Z:\msys64\home\arpa2\quick-der\build><b>set PATH=%PATH%;z:\msys64\mingw64\bin</b>
-
-Z:\msys64\home\arpa2\quick-der\build><b>cmake -G "MinGW Makefiles" "-DCMAKE_INSTALL_PREFIX:PATH=Z:/msys64/mingw64" "-DCMAKE_C_STANDARD_LIBRARIES:STRING=-lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 -lwsock32 -lws2_32"  "-DCMAKE_SHARED_LIBRARY_SUFFIX:STRING=.dll.a" ..</b>
+Z:\msys64\home\arpa2\quick-der\build><b>cmake -G "MinGW Makefiles" "-DCMAKE_INSTALL_PREFIX:PATH=Z:/msys64/mingw64" ..</b>
 -- The C compiler identification is GNU 8.3.0
 -- Check for working C compiler: Z:/msys64/mingw64/bin/gcc.exe
 -- Check for working C compiler: Z:/msys64/mingw64/bin/gcc.exe -- works
@@ -191,9 +221,7 @@ Z:\msys64\home\arpa2\tlspool><b>mkdir build</b>
 
 Z:\msys64\home\arpa2\tlspool><b>cd build</b>
 
-Z:\msys64\home\arpa2\tlspool\build><b>set PATH=%PATH%;z:\msys64\mingw64\bin</b>
-
-Z:\msys64\home\arpa2\tlspool\build><b>cmake -G "MinGW Makefiles" "-DCMAKE_INSTALL_PREFIX:PATH=Z:/msys64/mingw64" "-DCMAKE_C_STANDARD_LIBRARIES:STRING=-lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 -lwsock32 -lws2_32"  "-DCMAKE_SHARED_LIBRARY_SUFFIX:STRING=.dll.a" ..</b>
+Z:\msys64\home\arpa2\tlspool\build><b>cmake -G "MinGW Makefiles" "-DCMAKE_INSTALL_PREFIX:PATH=Z:/msys64/mingw64" "-DCMAKE_C_STANDARD_LIBRARIES:STRING=-lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 -lwsock32 -lws2_32" ..</b>
 
 -- The C compiler identification is GNU 8.3.0
 -- Check for working C compiler: Z:/msys64/mingw64/bin/gcc.exe
@@ -243,16 +271,6 @@ Call Stack (most recent call first):
 -- Generating done
 -- Build files have been written to: Z:/msys64/home/arpa2/tlspool/build
 
-Z:\msys64\home\arpa2\tlspool\build>
-</pre>
-
-A build file is not yet correctly generated. On another terminal
-<pre>
-docker exec -it win42 bash
-root@530226e28371:/# vi /msys64/home/arpa2/tlspool/build/src/CMakeFiles/tlspool.dir/build.make
-</pre>
-manually add '.a' to libquickder.dll and close vi. Continue on the wine terminal
-<pre>
 Z:\msys64\home\arpa2\tlspool\build><b>mingw32-make tlspool</b>
 Scanning dependencies of target tlspool
 [  5%] Building C object src/CMakeFiles/tlspool.dir/cache.c.obj
@@ -311,31 +329,28 @@ Scanning dependencies of target tlspool_shared
 [100%] Linking C shared library libtlspool.dll
 [100%] Built target tlspool_shared
 
-Z:\msys64\home\arpa2\tlspool\build><b>copy lib\libtlspool.dll z:\msys64\mingw64\bin</b>
+Z:\msys64\home\arpa2\tlspool\build><b>copy lib\libtlspool.dll   z:\msys64\mingw64\bin</b>
+Z:\msys64\home\arpa2\tlspool\build><b>copy lib\libtlspool.dll.a z:\msys64\mingw64\lib</b>
 
 Z:\msys64\home\arpa2\tlspool\build>
 </pre>
 
 ## Running tlspool
 <pre>
-root@530226e28371:/# <b>cd /msys64/home/tlspool/bin/</b>
-root@530226e28371:/# <b>wine cmd</b>
-Microsoft Windows 6.1.7601 (4.3)
-
-Z:\msys64\home\tlspool\bin><b>setenv</b>
-
-Z:\msys64\home\tlspool\bin>set PATH=C:\windows\system32;C:\windows;C:\windows\system32\wbem;z:\msys64\mingw64\bin 
-
-Z:\msys64\home\tlspool\bin>set TLSPOOL_CFGFILE=tlspool.conf.windows  
-
-Z:\msys64\home\tlspool\bin><b>server</b>
-Z:\msys64\home\tlspool\bin>tlspool -c tlspool.conf.windows  
+root@530226e28371:/# <b>wine cmd /c /msys64/home/tlspool/bin/server.bat</b>
+000b:fixme:winediag:start_process Wine Staging 4.3 is a testing version containing experimental patches.
+000b:fixme:winediag:start_process Please mention your exact version when filing bug reports on winehq.org.
+libudev: udev_has_devtmpfs: name_to_handle_at on /dev: Operation not permitted
+  
+Z:\>cd \msys64\home\tlspool\bin
+  
+Z:\msys64\home\tlspool\bin>tlspool -c tlspool.conf.windows
 The Winsock 2.2 dll was found okay
-0193:fixme:ntdll:NtLockFile I/O completion on lock not implemented yet
-0193:fixme:advapi:RegisterEventSourceA ((null),"SoftHSM"): stub
-0193:fixme:advapi:RegisterEventSourceW (L"",L"SoftHSM"): stub
-0193:fixme:advapi:ReportEventA (0xcafe4242,0x0002,0x0000,0x80000002,(nil),0x0001,0x00000000,0x32f060,(nil)): stub
-0193:fixme:advapi:ReportEventW (0xcafe4242,0x0002,0x0000,0x80000002,(nil),0x0001,0x00000000,0x72db0,(nil)): stub
+002b:fixme:ntdll:NtLockFile I/O completion on lock not implemented yet
+002b:fixme:advapi:RegisterEventSourceA ((null),"SoftHSM"): stub
+002b:fixme:advapi:RegisterEventSourceW (L"",L"SoftHSM"): stub
+002b:fixme:advapi:ReportEventA (0xcafe4242,0x0002,0x0000,0x80000002,(nil),0x0001,0x00000000,0x32f060,(nil)): stub
+002b:fixme:advapi:ReportEventW (0xcafe4242,0x0002,0x0000,0x80000002,(nil),0x0001,0x00000000,0x718e0,(nil)): stub
 This version ignores all LDAP proxy servers
 This version ignores all LDAP proxy servers
 TLS Pool started
@@ -345,49 +360,28 @@ Setting server anonymous credentials
 Setting client anonymous credentials
 Setting client and server certificate credentials
 GnuTLS: added 6 protocols, 35 ciphersuites, 18 sig algos and 9 groups into priority list
-
+  
 DEBUG: gtls_errno = 0, otfsigcrt == NULL, otfsigkey == NULL
 DEBUG: When it matters, gtls_errno = 0, onthefly_issuercrt == NULL, onthefly_issuerkey == NULL
 </pre>
 
 On another terminal we run a server using tlspool
 <pre>
-henris-mbp:wine manson$ docker exec -it win42 bash
-root@530226e28371:/# <b>cd /msys64/home/tlspool/bin</b>
-root@530226e28371:/msys64/home/tlspool/bin# <b>wine cmd</b>
-Microsoft Windows 6.1.7601 (4.3)
-
-Z:\msys64\home\tlspool\bin><b>setenv</b>
-
-Z:\msys64\home\tlspool\bin>set PATH=C:\windows\system32;C:\windows;C:\windows\system32\wbem;z:\msys64\mingw64\bin 
-
-Z:\msys64\home\tlspool\bin>set TLSPOOL_CFGFILE=tlspool.conf.windows  
-
-Z:\msys64\home\tlspool\bin><b>testsrvdll</b>
+henris-mbp:wine manson$ <b>docker exec -it winehq bash</b>
+root@530226e28371:/# <b>wine /msys64/home/tlspool/bin/testsrvdll.exe</b>
 </pre>
 
 On yet another terminal we run a client using tlspool
 <pre>
-henris-mbp:wine manson$ docker exec -it win42 bash
-root@530226e28371:/# <b>cd /msys64/home/tlspool/bin</b>
-root@530226e28371:/msys64/home/tlspool/bin# <b>wine cmd</b>
-Microsoft Windows 6.1.7601 (4.3)
-
-Z:\msys64\home\tlspool\bin><b>setenv</b>
-
-Z:\msys64\home\tlspool\bin>set PATH=C:\windows\system32;C:\windows;C:\windows\system32\wbem;z:\msys64\mingw64\bin 
-
-Z:\msys64\home\tlspool\bin>set TLSPOOL_CFGFILE=tlspool.conf.windows  
-
-Z:\msys64\home\tlspool\bin><b>testclidll localhost</b>
+henris-mbp:wine manson$ <b>docker exec -it winehq bash</b>
+root@530226e28371:/# <b>wine /msys64/home/tlspool/bin/testclidll.exe localhost</b>
 DEBUG: Opening TLS Pool on socket path \\.\pipe\tlspool
-GetNamedPipeServerProcessId: ServerProcessId = 407
-DEBUG: pid = 407, cryptfd = 76
+GetNamedPipeServerProcessId: ServerProcessId = 42
+DEBUG: pid = 42, cryptfd = 80
 Sending 1028 byte cmd
-018d:fixme:winsock:WS_EnterSingleProtocolW unknown Protocol <0x00000000>
+0037:fixme:winsock:WS_EnterSingleProtocolW unknown Protocol <0x00000000>
 Sending 1028 byte cmd
 Bytes Sent: 15
 Bytes received: 15, data: this is a test
-
 </pre>
 

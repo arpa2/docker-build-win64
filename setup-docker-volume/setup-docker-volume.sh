@@ -22,8 +22,8 @@ else
 fi
 
 # tlspool packages
-if [ -d /msys64/home ]; then
-   echo "/msys64/home already exists"
+if [ -d /msys64/home/arpa2 ]; then
+   echo "/msys64/home/arpa2 already exists"
 else
 # ARPA2
    echo Cloning ARPA2 packages...
