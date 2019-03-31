@@ -222,7 +222,6 @@ Z:\msys64\home\arpa2\tlspool><b>mkdir build</b>
 Z:\msys64\home\arpa2\tlspool><b>cd build</b>
 
 Z:\msys64\home\arpa2\tlspool\build><b>cmake -G "MinGW Makefiles" "-DCMAKE_INSTALL_PREFIX:PATH=Z:/msys64/mingw64" ..</b>
-
 -- The C compiler identification is GNU 8.3.0
 -- Check for working C compiler: Z:/msys64/mingw64/bin/gcc.exe
 -- Check for working C compiler: Z:/msys64/mingw64/bin/gcc.exe -- works
@@ -241,6 +240,7 @@ Call Stack (most recent call first):
 -- Found GnuTLS: Z:/msys64/mingw64/lib/libgnutls.dll.a  
 -- Found PkgConfig: Z:/msys64/mingw64/bin/pkg-config.exe (found version "0.29.2") 
 -- Found GnuTLSDane: Z:/msys64/mingw64/lib/libgnutls-dane.dll.a  
+-- Could NOT find KERBEROS (missing: KERBEROS_LIBRARY KERBEROS_INCLUDE_DIR) 
 -- Found Libldns: Z:/msys64/mingw64/lib/libldns.dll.a  
 -- Found LibTASN1: Z:/msys64/mingw64/lib/libtasn1.dll.a  
 -- Found OpenLDAP: Z:/msys64/mingw64/lib/libldap.dll.a  
@@ -262,16 +262,18 @@ Call Stack (most recent call first):
  * LibTASN1, ASN.1 library used by GnuTLS, <http://www.gnu.org/software/libtasn1/>
  * OpenLDAP
  * P11-Kit, PKCS#11 module loader, <https://p11-glue.freedesktop.org/p11-kit.html>
- * Quick-DER
+ * Quick-DER (required version >= 1.2.4)
  * Unbound
 
--- Building TLSPool tests
-.. run 'make test' to run them.
+-- The following OPTIONAL packages have not been found:
+
+ * KERBEROS
+
 -- Configuring done
 -- Generating done
 -- Build files have been written to: Z:/msys64/home/arpa2/tlspool/build
 
-Z:\msys64\home\arpa2\tlspool\build><b>mingw32-make instlll</b>
+Z:\msys64\home\arpa2\tlspool\build><b>mingw32-make install</b>
 Scanning dependencies of target tlspool
 [  5%] Building C object src/CMakeFiles/tlspool.dir/cache.c.obj
 [ 11%] Building C object src/CMakeFiles/tlspool.dir/config.c.obj
