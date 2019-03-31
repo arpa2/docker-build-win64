@@ -212,16 +212,16 @@ Z:\msys64\home\arpa2\quick-der\build><b>copy lib\libquickder.dll z:\msys64\mingw
 ## Building and installing tlspool
 
 <pre>
+root@530226e28371:/# <b>cd /msys64/home/arpa2/tlspool</b>
+root@530226e28371:/# <b>git checkout posix_windows</b>
 root@530226e28371:/# <b>wine cmd</b>
 Microsoft Windows 6.1.7601 (4.3)
-
-Z:\><b>cd \msys64\home\arpa2\tlspool</b>
 
 Z:\msys64\home\arpa2\tlspool><b>mkdir build</b>
 
 Z:\msys64\home\arpa2\tlspool><b>cd build</b>
 
-Z:\msys64\home\arpa2\tlspool\build><b>cmake -G "MinGW Makefiles" "-DCMAKE_INSTALL_PREFIX:PATH=Z:/msys64/mingw64" "-DCMAKE_C_STANDARD_LIBRARIES:STRING=-lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 -lwsock32 -lws2_32" ..</b>
+Z:\msys64\home\arpa2\tlspool\build><b>cmake -G "MinGW Makefiles" "-DCMAKE_INSTALL_PREFIX:PATH=Z:/msys64/mingw64" ..</b>
 
 -- The C compiler identification is GNU 8.3.0
 -- Check for working C compiler: Z:/msys64/mingw64/bin/gcc.exe
@@ -271,66 +271,49 @@ Call Stack (most recent call first):
 -- Generating done
 -- Build files have been written to: Z:/msys64/home/arpa2/tlspool/build
 
-Z:\msys64\home\arpa2\tlspool\build><b>mingw32-make tlspool</b>
+Z:\msys64\home\arpa2\tlspool\build><b>mingw32-make instlll</b>
 Scanning dependencies of target tlspool
 [  5%] Building C object src/CMakeFiles/tlspool.dir/cache.c.obj
 [ 11%] Building C object src/CMakeFiles/tlspool.dir/config.c.obj
 [ 16%] Building C object src/CMakeFiles/tlspool.dir/ctlkey.c.obj
-[ 22%] Building C object src/CMakeFiles/tlspool.dir/daemon.c.obj
-[ 27%] Building C object src/CMakeFiles/tlspool.dir/donai.c.obj
-[ 33%] Building C object src/CMakeFiles/tlspool.dir/error.c.obj
-[ 38%] Building C object src/CMakeFiles/tlspool.dir/lidentry.c.obj
-[ 44%] Building C object src/CMakeFiles/tlspool.dir/manage.c.obj
-[ 50%] Building C object src/CMakeFiles/tlspool.dir/online.c.obj
-Z:\msys64\home\arpa2\tlspool\src\online.c: In function 'ldap_getattr_first':
-Z:\msys64\home\arpa2\tlspool\src\online.c:1049:5: warning: passing argument 7 of 'ldap_search_st' from incompatible pointer type [-Wincompatible-pointer-types]
-     &ldap_timeout, &dta->ldap_attr_search);
-     ^~~~~~~~~~~~~
-In file included from Z:\msys64\home\arpa2\tlspool\src\online.c:35:
-Z:/msys64/mingw64/x86_64-w64-mingw32/include/winldap.h:396:136: note: expected 'struct l_timeval *' but argument is of type 'struct timeval *'
-   WINLDAPAPI ULONG LDAPAPI ldap_search_st(LDAP *ld,PCHAR base,ULONG scope,PCHAR filter,PCHAR attrs[],ULONG attrsonly,struct l_timeval *timeout,LDAPMessage **res);
-                                                                                                                      ~~~~~~~~~~~~~~~~~~^~~~~~~
-[ 55%] Building C object src/CMakeFiles/tlspool.dir/pgp.c.obj
-[ 61%] Building C object src/CMakeFiles/tlspool.dir/pinentry.c.obj
-[ 66%] Building C object src/CMakeFiles/tlspool.dir/remote.c.obj
-[ 72%] Building C object src/CMakeFiles/tlspool.dir/service.c.obj
-[ 77%] Building C object src/CMakeFiles/tlspool.dir/starttls.c.obj
-Z:\msys64\home\arpa2\tlspool\src\starttls.c: In function 'clisrv_cert_retrieve':
-Z:\msys64\home\arpa2\tlspool\src\starttls.c:1557:148: warning: cast from pointer to integer of different size [-Wpointer-to-int-cast]
- fprintf (stderr, "DEBUG: clisrv_cert_retrieve() sets *pcert to 0x%lx (length %d)... {pubkey = 0x%lx, cert= {data = 0x%lx, size=%ld}, type=%ld}\n", (long) *pcert, *pcert_length, (long) (*pcert)->pubkey, (long) (*pcert)->cert.data, (long) (*pcert)->cert.size, (long) (*pcert)->type);
-                                                                                                                                                    ^
-Z:\msys64\home\arpa2\tlspool\src\starttls.c:1557:178: warning: cast from pointer to integer of different size [-Wpointer-to-int-cast]
- fprintf (stderr, "DEBUG: clisrv_cert_retrieve() sets *pcert to 0x%lx (length %d)... {pubkey = 0x%lx, cert= {data = 0x%lx, size=%ld}, type=%ld}\n", (long) *pcert, *pcert_length, (long) (*pcert)->pubkey, (long) (*pcert)->cert.data, (long) (*pcert)->cert.size, (long) (*pcert)->type);
-                                                                                                                                                                                  ^
-Z:\msys64\home\arpa2\tlspool\src\starttls.c:1557:203: warning: cast from pointer to integer of different size [-Wpointer-to-int-cast]
- fprintf (stderr, "DEBUG: clisrv_cert_retrieve() sets *pcert to 0x%lx (length %d)... {pubkey = 0x%lx, cert= {data = 0x%lx, size=%ld}, type=%ld}\n", (long) *pcert, *pcert_length, (long) (*pcert)->pubkey, (long) (*pcert)->cert.data, (long) (*pcert)->cert.size, (long) (*pcert)->type);
-                                                                                                                                                                                                           ^
-[ 83%] Building C object src/CMakeFiles/tlspool.dir/trust.c.obj
-[ 88%] Building C object src/CMakeFiles/tlspool.dir/validate.c.obj
-[ 94%] Building C object src/CMakeFiles/tlspool.dir/windows/syslog.c.obj
-[100%] Linking C executable tlspool.exe
-[100%] Built target tlspool
-
-Z:\msys64\home\arpa2\tlspool\build><b>copy src\tlspool.exe z:\msys64\mingw64\bin</b>
-
-Z:\msys64\home\arpa2\tlspool\build><b>mingw32-make tlspool_shared</b>
-Scanning dependencies of target _libtlspool
-[ 20%] Building C object lib/CMakeFiles/_libtlspool.dir/libtlspool.c.obj
-Z:\msys64\home\arpa2\tlspool\lib\libtlspool.c: In function 'tlspool_open_poolhandle':
-Z:\msys64\home\arpa2\tlspool\lib\libtlspool.c:142:27: warning: implicit declaration of function 'time'; did you mean 'ftime'? [-Wimplicit-function-declaration]
-    seed = ((unsigned int) time (NULL)) ^ (((unsigned int) me) << 16);
-                           ^~~~
-                           ftime
-[ 40%] Building C object lib/CMakeFiles/_libtlspool.dir/libtlspool_configvar.c.obj
-[ 60%] Building C object lib/CMakeFiles/_libtlspool.dir/windows/syslog.c.obj
-[ 80%] Building C object lib/CMakeFiles/_libtlspool.dir/windows/socketpair.c.obj
-[ 80%] Built target _libtlspool
-Scanning dependencies of target tlspool_shared
-[100%] Linking C shared library libtlspool.dll
-[100%] Built target tlspool_shared
-
-Z:\msys64\home\arpa2\tlspool\build><b>copy lib\libtlspool.dll   z:\msys64\mingw64\bin</b>
-Z:\msys64\home\arpa2\tlspool\build><b>copy lib\libtlspool.dll.a z:\msys64\mingw64\lib</b>
+...
+[100%] Built target tlspool_static
+Install the project...
+-- Install configuration: ""
+-- Installing: Z:/msys64/mingw64/sbin/tlspool.exe
+-- Installing: /usr/include/tlspool
+-- Installing: Z:/msys64/mingw64/include/tlspool
+-- Installing: Z:/msys64/mingw64/include/tlspool/commands.h
+-- Installing: Z:/msys64/mingw64/include/tlspool/commands.h.new
+-- Installing: Z:/msys64/mingw64/include/tlspool/internal.h
+-- Installing: Z:/msys64/mingw64/include/tlspool/starttls.h
+-- Installing: Z:/msys64/mingw64/lib/libtlspool.dll.a
+-- Installing: Z:/msys64/mingw64/lib/libtlspool.a
+-- Installing: Z:/msys64/mingw64/share/doc/tlspool/socketprotocol.rst
+-- Installing: Z:/msys64/mingw64/share/doc/tlspool/databases.rst
+-- Installing: Z:/msys64/mingw64/share/doc/tlspool/identities.rst
+-- Installing: Z:/msys64/mingw64/share/doc/tlspool/pkcs11.rst
+-- Installing: Z:/msys64/mingw64/share/doc/tlspool/validation.md
+-- Installing: Z:/msys64/mingw64/share/doc/tlspool/startxxx.md
+-- Installing: Z:/msys64/mingw64/share/doc/tlspool/p2p-tls.md
+-- Installing: Z:/msys64/mingw64/share/doc/tlspool/ircproxy-explained.md
+-- Installing: Z:/msys64/mingw64/share/doc/tlspool/localid-selection.md
+-- Installing: Z:/msys64/mingw64/share/doc/tlspool/anonymising-precursor.md
+-- Installing: Z:/msys64/mingw64/share/doc/tlspool/COPYRIGHT.MD
+-- Installing: Z:/msys64/mingw64/share/doc/tlspool/LICENSE-DAEMON.MD
+-- Installing: Z:/msys64/mingw64/share/doc/tlspool/LICENSE-DOCS.MD
+-- Installing: Z:/msys64/mingw64/share/doc/tlspool/LICENSE-USERSPACE.MD
+-- Installing: Z:/msys64/mingw64/share/man/man3/tlspool_socket.3
+-- Installing: Z:/msys64/mingw64/share/man/man3/tlspool_starttls.3
+-- Installing: Z:/msys64/mingw64/share/man/man3/tlspool_ping.3
+-- Installing: Z:/msys64/mingw64/share/man/man3/tlspool_prng.3
+-- Installing: Z:/msys64/mingw64/share/man/man3/tlspool_pin_service.3
+-- Installing: Z:/msys64/mingw64/share/man/man3/tlspool_localid_service.3
+-- Installing: Z:/msys64/mingw64/share/man/man3/tlspool_control_detach.3
+-- Installing: Z:/msys64/mingw64/share/man/man3/tlspool_control_reattach.3
+-- Installing: Z:/msys64/mingw64/share/man/man3/tlspool_configvar.3
+-- Installing: Z:/msys64/mingw64/share/man/man8/tlspool.8
+-- Installing: Z:/msys64/mingw64/share/man/man8/tlstunnel.8
 
 Z:\msys64\home\arpa2\tlspool\build>
 </pre>
