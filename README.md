@@ -283,7 +283,6 @@ Scanning dependencies of target tlspool
 Install the project...
 -- Install configuration: ""
 -- Installing: Z:/msys64/mingw64/sbin/tlspool.exe
--- Installing: /usr/include/tlspool
 -- Installing: Z:/msys64/mingw64/include/tlspool
 -- Installing: Z:/msys64/mingw64/include/tlspool/commands.h
 -- Installing: Z:/msys64/mingw64/include/tlspool/commands.h.new
