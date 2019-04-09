@@ -10,3 +10,4 @@ RUN apt-key add /root/winehq.key && echo 'deb https://dl.winehq.org/wine-builds/
 RUN apt-get update && apt-get -y install winehq-staging
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 COPY wine /root/.wine
+COPY setup-docker-volume/com_err/mingw64 /msys64/mingw64

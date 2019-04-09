@@ -52516,8 +52516,8 @@ WINE REGISTRY Version 2
 "CommonPictures"=str(2):"%PUBLIC%\\Pictures"
 "CommonVideo"=str(2):"%PUBLIC%\\Videos"
 
-[Software\\Microsoft\\Windows\\CurrentVersion\\Fonts] 1552560254 8789590
-#time=1d4da52de16b156
+[Software\\Microsoft\\Windows\\CurrentVersion\\Fonts] 1554833839 9548700
+#time=1d4ef007865951c
 "@Microsoft Yahei (TrueType)"="Z:\\opt\\wine-staging\\bin\\..\\share\\wine\\fonts\\msyh.ttf"
 "Arial (TrueType)"="Z:\\opt\\wine-staging\\bin\\..\\share\\wine\\fonts\\arial.ttf"
 "Courier"="coure.fon"
@@ -54808,8 +54808,8 @@ WINE REGISTRY Version 2
 [Software\\Microsoft\\Windows NT\\CurrentVersion\\FontMapper] 1552219393 4516700
 #time=1d4d7393cd881dc
 
-[Software\\Microsoft\\Windows NT\\CurrentVersion\\Fonts] 1552560254 8789060
-#time=1d4da52de16af44
+[Software\\Microsoft\\Windows NT\\CurrentVersion\\Fonts] 1554833839 9548430
+#time=1d4ef007865940e
 "@Microsoft Yahei (TrueType)"="Z:\\opt\\wine-staging\\bin\\..\\share\\wine\\fonts\\msyh.ttf"
 "Arial (TrueType)"="Z:\\opt\\wine-staging\\bin\\..\\share\\wine\\fonts\\arial.ttf"
 "Courier"="coure.fon"
@@ -61063,9 +61063,9 @@ WINE REGISTRY Version 2
 @="Human Interface Devices"
 "Class"="HIDClass"
 
-[System\\CurrentControlSet\\Control\\ComputerName\\ComputerName] 1552560236 5910800
-#time=1d4da52d3302f10
-"ComputerName"="db190d330414"
+[System\\CurrentControlSet\\Control\\ComputerName\\ComputerName] 1554833839 7106400
+#time=1d4ef00784050e0
+"ComputerName"="bd42652b7a34"
 
 [System\\CurrentControlSet\\Control\\ContentIndex\\Language\\Neutral] 1552219393 4479730
 #time=1d4d7393cd7f172
@@ -61460,22 +61460,22 @@ WINE REGISTRY Version 2
 "HeapSegmentCommit"=dword:00000000
 "HeapSegmentReserve"=dword:00000000
 
-[System\\CurrentControlSet\\Control\\Session Manager\\Environment] 1552560540 4240050
-#time=1d4da53884968b2
+[System\\CurrentControlSet\\Control\\Session Manager\\Environment] 1554833839 7671160
+#time=1d4ef007848eef8
 "ComSpec"=str(2):"C:\\windows\\system32\\cmd.exe"
 "New Value #1"="\0"
 "NUMBER_OF_PROCESSORS"="2"
 "OS"="Windows_NT"
-"PATH"=str(2):"C:\\windows\\system32;C:\\windows;C:\\windows\\system32\\wbem;Z:\\msys64\\mingw64\\bin"
+"PATH"=str(2):"C:\\windows\\system32;C:\\windows;C:\\windows\\system32\\wbem;Z:\\msys64\\mingw64\\bin;Z:\\msys64\\mingw64\sbin"
 "PATHEXT"=".COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH"
 "PROCESSOR_ARCHITECTURE"="AMD64"
-"PROCESSOR_IDENTIFIER"="Intel64 Family 6 Model 58 Stepping 9, GenuineIntel"
+"PROCESSOR_IDENTIFIER"="Intel64 Family 6 Model 15 Stepping 13, GenuineIntel"
 "PROCESSOR_LEVEL"="6"
-"PROCESSOR_REVISION"="3a09"
+"PROCESSOR_REVISION"="0f0d"
 "SystemDrive"="c:"
 "SYSTEMROOT"="C:\\windows"
 "TEMP"=str(2):"C:\\windows\\temp"
-"TLSPOOL_CFGFILE"="Z:\\msys64\\home\\tlspool\\bin\\tlspool.conf.windows"
+"TLSPOOL_CONFIG_FILE"="Z:\\msys64\\home\\tlspool\\bin\\tlspool.conf.windows"
 "TMP"=str(2):"C:\\windows\\temp"
 "windir"=str(2):"C:\\windows"
 "winsysdir"="C:\\windows\\system32"
