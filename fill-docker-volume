@@ -13,5 +13,4 @@ docker cp setup-docker-volume/home winehq:/msys64
 # fill docker volume with mingw64 and git repositories
 docker exec -t winehq /tmp/setup-docker-volume.sh
 # 
-docker exec -t winehq mkdir  
 docker stop winehq
