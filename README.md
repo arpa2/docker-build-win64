@@ -352,14 +352,14 @@ DEBUG: When it matters, gtls_errno = 0, onthefly_issuercrt == NULL, onthefly_iss
 On another terminal we run a chat server using tlspool
 <pre>
 henris-mbp:wine manson$ <b>docker exec -it winehq bash</b>
-root@530226e28371:/# <b>wine /msys64/mingw64/sbin/chatsrv.exe tlspool.arpa2.lab 127.0.0.1 12345</b>
+root@530226e28371:/# <b>wine /msys64/mingw64/sbin/tlspool-chat-server.exe tlspool.arpa2.lab 127.0.0.1 12345</b>
 --
 </pre>
 
 On yet another terminal we run a chat client using tlspool
 <pre>
 henris-mbp:wine manson$ <b>docker exec -it winehq bash</b>
-root@530226e28371:/# <b>wine /msys64/mingw64/sbin/chatcli.exe tlspool.arpa2.lab 127.0.0.1 12345
+root@530226e28371:/# <b>wine /msys64/mingw64/sbin/tlspool-chat-client.exe tlspool.arpa2.lab 127.0.0.1 12345
 </b>
 --
 DEBUG: Opening TLS Pool on socket path \\.\pipe\tlspool
