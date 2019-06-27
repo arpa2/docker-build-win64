@@ -1,6 +1,6 @@
 #!/bin/sh
 
-docker run --name winehq --rm --mount src=mingw64,dst=/msys64 -t -d wine
+docker run --name winehq --rm --mount src=mingw64,dst=/msys64 -t -d arpa2/wine
 # copy files to /tmp of docker
 # GnuTLS with dane
 docker cp setup-docker-volume/mingw-w64-x86_64-gnutls-3.6.6-2-any.pkg.tar.xz winehq:/tmp

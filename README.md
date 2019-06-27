@@ -6,7 +6,7 @@ Docker container to build ARPA2 software for 64-bit Windows
 <pre>
 $ <b>git clone https://github.com/arpa2/docker-build-win64</b>
 $ <b>cd docker-build-win64</b>
-$ <b>docker build --tag wine .</b>
+$ <b>docker build --tag arpa2/wine .</b>
 </pre>
 
 ## create mingw64 docker volume and fill it
@@ -65,7 +65,7 @@ $
 * \-it interactive terminal
 * wine name of docker image
 <pre>
-$ <b>docker run --name winehq --rm --mount src=mingw64,dst=/msys64 -it wine</b>
+$ <b>docker run --name winehq --rm --mount src=mingw64,dst=/msys64 -it arpa2/wine</b>
 </pre>
 
 ## Building and installing ARPA2CM
