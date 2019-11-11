@@ -11,9 +11,6 @@
 #
 
 #
-# The TLS Pool is a daemon.  Set its PID file here, to be used in scripts.
-#
-daemon_pidfile /var/run/tlspool.pid
 
 #
 # The TLS Pool listens to a UNIX domain socket, reachable to users and groups
