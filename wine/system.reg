@@ -61466,7 +61466,7 @@ WINE REGISTRY Version 2
 "New Value #1"="\0"
 "NUMBER_OF_PROCESSORS"="2"
 "OS"="Windows_NT"
-"PATH"=str(2):"C:\\windows\\system32;C:\\windows;C:\\windows\\system32\\wbem;Z:\\msys64\\mingw64\\bin;Z:\\msys64\\mingw64\sbin"
+"PATH"=str(2):"C:\\windows\\system32;C:\\windows;C:\\windows\\system32\\wbem;Z:\\msys64\\mingw64\\bin;Z:\\msys64\\mingw64\\sbin"
 "PATHEXT"=".COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH"
 "PROCESSOR_ARCHITECTURE"="AMD64"
 "PROCESSOR_IDENTIFIER"="Intel64 Family 6 Model 15 Stepping 13, GenuineIntel"
