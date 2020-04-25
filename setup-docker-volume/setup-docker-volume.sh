@@ -26,7 +26,7 @@ else
    mkdir -p /msys64/home/arpa2
    cd /msys64/home/arpa2
    git clone https://gitlab.com/arpa2/arpa2cm
-   git clone https://github.com/hfmanson/quick-der
+   git clone https://gitlab.com/arpa2/quick-der
    git clone https://github.com/hfmanson/tlspool
 # cmake with updated shell_path
    echo Cloning cmake with updated SHELL_PATH...
