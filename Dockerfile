@@ -7,6 +7,8 @@ RUN apt-get update && apt-get -y install wget less vim apt-transport-https xz-ut
 # RUN wget https://dl.winehq.org/wine-builds/winehq.key && apt-key add winehq.key && echo 'deb https://dl.winehq.org/wine-builds/debian/ stable main' >> /etc/apt/sources.list && rm winehq.key
 COPY winehq.key /root/winehq.key
 RUN apt-key add /root/winehq.key && echo 'deb https://dl.winehq.org/wine-builds/debian/ stable main' >> /etc/apt/sources.list && rm /root/winehq.key
+RUN wget https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/Debian_10/amd64/libfaudio0_20.01-0~buster_amd64.deb && apt install -y libstb0 libsdl2-2.0-0  libavutil56 libavcodec58 && dpkg -i libfaudio0_20.01-0~buster_amd64.deb
+RUN wget https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/Debian_10/i386/libfaudio0_20.01-0~buster_i386.deb && apt install -y libstb0:i386 libsdl2-2.0-0:i386  libavutil56:i386 libavcodec58:i386 && dpkg -i libfaudio0_20.01-0~buster_i386.deb
 RUN apt-get update && apt-get -y install winehq-stable
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 COPY wine /root/.wine
