@@ -11,7 +11,6 @@ RUN wget https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/Debi
 RUN wget https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/Debian_10/i386/libfaudio0_20.01-0~buster_i386.deb && apt install -y libstb0:i386 libsdl2-2.0-0:i386  libavutil56:i386 libavcodec58:i386 && dpkg -i libfaudio0_20.01-0~buster_i386.deb
 RUN apt-get update && apt-get -y install winehq-stable
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
-COPY wine /root/.wine
 COPY setup-docker-volume/com_err/mingw64 /msys64/mingw64
 
 # copy files to /tmp of docker
@@ -22,6 +21,9 @@ COPY setup-docker-volume/mingw64-packages.txt /tmp
 # script to setup docker volume
 COPY setup-docker-volume/setup-docker-volume.sh /tmp
 # tlspool configuration files and client programs
-COPY setup-docker-volume/home /msys64
+COPY setup-docker-volume/home /msys64/home
+COPY wine /root/.wine
 # fill docker volume with mingw64 and git repositories
 RUN /tmp/setup-docker-volume.sh
+
+CMD ["bash"]
