@@ -9,63 +9,13 @@ $ <b>cd docker-build-win64</b>
 $ <b>docker build --tag arpa2/wine .</b>
 </pre>
 
-## create mingw64 docker volume and fill it
-<pre>
-$ <b>./fill-docker-volume</b>
-e09f68a1ea05389898018c3036c57da51cfa423aa4474a175df41451fdd07648
-Extracting mingw-w64-x86_64-adwaita-icon-theme-3.30.1-1-any.pkg.tar.xz...
-Extracting mingw-w64-x86_64-atk-2.30.0-1-any.pkg.tar.xz...
-Extracting mingw-w64-x86_64-binutils-2.30-5-any.pkg.tar.xz...
-Extracting mingw-w64-x86_64-brotli-1.0.7-1-any.pkg.tar.xz...
-...
-Extracting mingw-w64-x86_64-zlib-1.2.11-5-any.pkg.tar.xz...
-Extracting mingw-w64-x86_64-zstd-1.3.8-1-any.pkg.tar.xz...
-Extracting GnuTLS with libdane...
-Cloning ARPA2 packages...
-Cloning into 'arpa2cm'...
-remote: Enumerating objects: 3, done.
-remote: Counting objects: 100% (3/3), done.
-remote: Compressing objects: 100% (3/3), done.
-remote: Total 166 (delta 0), reused 1 (delta 0), pack-reused 163
-Receiving objects: 100% (166/166), 46.23 KiB | 0 bytes/s, done.
-Resolving deltas: 100% (86/86), done.
-Checking connectivity... done.
-Cloning into 'quick-der'...
-remote: Enumerating objects: 143, done.
-remote: Counting objects: 100% (143/143), done.
-remote: Compressing objects: 100% (79/79), done.
-remote: Total 1949 (delta 80), reused 102 (delta 57), pack-reused 1806
-Receiving objects: 100% (1949/1949), 1.63 MiB | 1.69 MiB/s, done.
-Resolving deltas: 100% (1223/1223), done.
-Checking connectivity... done.
-Cloning into 'tlspool'...
-remote: Enumerating objects: 134, done.
-remote: Counting objects: 100% (134/134), done.
-remote: Compressing objects: 100% (77/77), done.
-remote: Total 3772 (delta 66), reused 93 (delta 44), pack-reused 3638
-Receiving objects: 100% (3772/3772), 3.22 MiB | 1.98 MiB/s, done.
-Resolving deltas: 100% (2260/2260), done.
-Checking connectivity... done.
-Cloning cmake with updated SHELL_PATH...
-Cloning into 'cmake'...
-remote: Enumerating objects: 266093, done.
-remote: Counting objects: 100% (266093/266093), done.
-remote: Compressing objects: 100% (61448/61448), done.
-remote: Total 266093 (delta 202428), reused 266015 (delta 202366)
-Receiving objects: 100% (266093/266093), 79.90 MiB | 10.77 MiB/s, done.
-Resolving deltas: 100% (202428/202428), done.
-Checking connectivity... done.
-winehq
-$ 
-</pre>
 ## start wine container
 * \-\-name winehq name of container
 * \-\-rm remove container after stopping
-* \-\-mount src=mingw64,dst=/msys64 mount mingw64 docker volume on /msys64
 * \-it interactive terminal
 * wine name of docker image
 <pre>
-$ <b>docker run --name winehq --rm --mount src=mingw64,dst=/msys64 -it arpa2/wine</b>
+$ <b>docker run --name winehq --rm -it arpa2/wine</b>
 </pre>
 
 ## Building and installing ARPA2CM
