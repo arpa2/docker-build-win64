@@ -15,3 +15,9 @@ done
 # copy gnutls with libdane
 echo Extracting GnuTLS with libdane...
 tar -C /msys64 -xJf mingw-w64-x86_64-gnutls-3.6.6-2-any.pkg.tar.xz mingw64
+
+# copy flex
+tar -C /msys64 -I zstd -xf mingw-w64-x86_64-flex-2.5.39-1-any.pkg.tar.zst mingw64
+
+# copy bison
+tar -C /msys64 -I zstd -xf mingw-w64-x86_64-bison-3.0.4-2-any.pkg.tar.zst mingw64
