@@ -119,6 +119,9 @@ typedef _W64 int         ssize_t;
 #define NO_PASSWORD
 #define HAVE_STRERROR
 #define SYS_ERRLIST_DECLARED
+#if _MSC_VER >= 1900
+#define HAVE_VSNPRINTF
+#endif
 /* Visual Studio 2012 errors out when we macroize keywords in C++ mode */
 #ifndef __cplusplus
 #define inline __inline
@@ -173,18 +176,6 @@ typedef _W64 int         ssize_t;
 #define HAVE_STDLIB_H
 #endif
 
-/* This controls which encryption routines libcrypto will provide */
-#define PROVIDE_DES_CBC_MD5
-#define PROVIDE_DES_CBC_CRC
-#define PROVIDE_DES_CBC_RAW
-#define PROVIDE_DES_CBC_CKSUM
-#define PROVIDE_CRC32
-#define PROVIDE_RSA_MD4
-#define PROVIDE_RSA_MD5
-/* #define PROVIDE_DES3_CBC_SHA */
-/* #define PROVIDE_DES3_CBC_RAW */
-/* #define PROVIDE_NIST_SHA */
-
 /* Ugly. Microsoft, in stdc mode, doesn't support the low-level i/o
  * routines directly. Rather, they only export the _<function> version.
  * The following defines works around this problem.
@@ -222,9 +213,7 @@ typedef _W64 int         ssize_t;
 
 HINSTANCE get_lib_instance(void);
 
-#define GETSOCKNAME_ARG2_TYPE   struct sockaddr
 #define GETSOCKNAME_ARG3_TYPE   size_t
-#define GETPEERNAME_ARG2_TYPE   GETSOCKNAME_ARG2_TYPE
 #define GETPEERNAME_ARG3_TYPE   GETSOCKNAME_ARG3_TYPE
 
 #endif /* !RES_ONLY */
