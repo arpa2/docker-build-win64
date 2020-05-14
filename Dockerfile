@@ -28,6 +28,9 @@ COPY setup-docker-volume/mingw-w64-x86_64-flex-2.5.39-1-any.pkg.tar.zst /tmp
 # Bison
 COPY setup-docker-volume/mingw-w64-x86_64-bison-3.0.4-2-any.pkg.tar.zst /tmp
 
+# Improved Cyrus SASL
+COPY setup-docker-volume/mingw-w64-x86_64-cyrus-sasl-2.1.27-1-any.pkg.tar.zst /tmp
+
 # list of MSYS2 packages to be installed on /msys64/mingw64
 COPY setup-docker-volume/mingw64-packages.txt /tmp
 # script to setup docker volume
